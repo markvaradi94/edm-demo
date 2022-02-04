@@ -12,22 +12,24 @@ public class RetryConfig {
 
     private final RetryConfigData retryConfigData;
 
-    public RetryConfig(RetryConfigData retryConfigData) {
-        this.retryConfigData = retryConfigData;
+    public RetryConfig(RetryConfigData configData) {
+        this.retryConfigData = configData;
     }
 
     @Bean
     public RetryTemplate retryTemplate() {
         RetryTemplate retryTemplate = new RetryTemplate();
+
         ExponentialBackOffPolicy exponentialBackOffPolicy = new ExponentialBackOffPolicy();
         exponentialBackOffPolicy.setInitialInterval(retryConfigData.getInitialIntervalMs());
         exponentialBackOffPolicy.setMaxInterval(retryConfigData.getMaxIntervalMs());
         exponentialBackOffPolicy.setMultiplier(retryConfigData.getMultiplier());
         retryTemplate.setBackOffPolicy(exponentialBackOffPolicy);
 
-        SimpleRetryPolicy simpleRetryPolicy = new SimpleRetryPolicy(retryConfigData.getMaxAttempts());
+        SimpleRetryPolicy simpleRetryPolicy = new SimpleRetryPolicy();
+        simpleRetryPolicy.setMaxAttempts(retryConfigData.getMaxAttempts());
         retryTemplate.setRetryPolicy(simpleRetryPolicy);
 
-        return  retryTemplate;
+        return retryTemplate;
     }
 }
