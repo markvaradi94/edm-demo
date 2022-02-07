@@ -8,10 +8,14 @@ spring:
           uri: https://github.com/markvaradi94/spring-cloud-config-server-repository.git
           clone-on-start: true
           username: markvaradi94
-          password: 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
+          password: ENC(lPa99mH/xzGcJEnENaXCn+oR3fAC6N8Yu2vaIIuGs61BTD/dgTaBc7EH0d118GId2+8OQivblmPvETbE/KuzrEff62BSIHE4oBxT09rGfMo=)
           default-label: master
       fail-fast: true
   security:
     user:
       name: spring_cloud_user
       password: springCloud_Pwd!
+
+jasypt:
+  encryptor:
+    password: Demo_Pwd!2020
