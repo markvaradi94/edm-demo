@@ -11,6 +11,8 @@
         <module>kafka/kafka-producer</module>
         <module>common-config</module>
         <module>config-server</module>
+        <module>kafka-consumer</module>
+        <module>kafka-to-elastic-service</module>
     </modules>
 
     <parent>
@@ -70,6 +72,11 @@
             <dependency>
                 <groupId>com.microservices.demo</groupId>
                 <artifactId>kafka-admin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microservices.demo</groupId>
+                <artifactId>kafka-consumer</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
