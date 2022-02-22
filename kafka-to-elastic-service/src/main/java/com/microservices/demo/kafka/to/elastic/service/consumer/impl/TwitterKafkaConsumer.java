@@ -49,7 +49,7 @@ public class TwitterKafkaConsumer implements KafkaConsumer<Long, TwitterAvroMode
     }
 
     @Override
-    @KafkaListener(id = "twitterTopicListener", topics = "${kafka-config.topic-name}")
+    @KafkaListener(id = "${kafka-consumer-config.consumer-group-id}", topics = "${kafka-config.topic-name}")
     public void receive(@Payload List<TwitterAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<Integer> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
