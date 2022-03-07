@@ -24,9 +24,9 @@ public class WebClientConfig {
 
     private final UserConfigData userConfigData;
 
-    public WebClientConfig(ElasticQueryWebClientConfigData.WebClient elasticQueryWebClientConfigData, UserConfigData userConfigData) {
-        this.elasticQueryWebClientConfigData = elasticQueryWebClientConfigData;
-        this.userConfigData = userConfigData;
+    public WebClientConfig(ElasticQueryWebClientConfigData webClientConfigData, UserConfigData userData) {
+        this.elasticQueryWebClientConfigData = webClientConfigData.getWebClient();
+        this.userConfigData = userData;
     }
 
     @LoadBalanced
@@ -42,16 +42,19 @@ public class WebClientConfig {
                 .codecs(clientCodecConfigurer ->
                         clientCodecConfigurer
                                 .defaultCodecs()
-                                .maxInMemorySize(elasticQueryWebClientConfigData.getMaxInMemorySize())
-                );
+                                .maxInMemorySize(elasticQueryWebClientConfigData.getMaxInMemorySize()));
     }
 
     private TcpClient getTcpClient() {
         return TcpClient.create()
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, elasticQueryWebClientConfigData.getConnectTimeoutMs())
                 .doOnConnected(connection -> {
-                    connection.addHandlerLast(new ReadTimeoutHandler(elasticQueryWebClientConfigData.getReadTimeoutMs(), TimeUnit.MILLISECONDS));
-                    connection.addHandlerLast(new WriteTimeoutHandler(elasticQueryWebClientConfigData.getWriteTimeoutMs(), TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(
+                            new ReadTimeoutHandler(elasticQueryWebClientConfigData.getReadTimeoutMs(),
+                                    TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(
+                            new WriteTimeoutHandler(elasticQueryWebClientConfigData.getWriteTimeoutMs(),
+                                    TimeUnit.MILLISECONDS));
                 });
     }
 }
