@@ -105,13 +105,13 @@ public class KafkaAdminClient {
         try {
             Thread.sleep(sleepTimeMs);
         } catch (InterruptedException e) {
-            throw new KafkaClientException("Error while sleeping for waiting new created topics!!");
+            throw new KafkaClientException("Error while sleeping for waiting new created topics.");
         }
     }
 
     private void checkMaxRetry(int retry, Integer maxRetry) {
         if (retry > maxRetry) {
-            throw new KafkaClientException("Reached max number of retry for reading kafka topic(s)!");
+            throw new KafkaClientException("Reached max number of retries for reading kafka topic(s).");
         }
     }
 

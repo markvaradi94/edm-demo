@@ -55,7 +55,7 @@ public class TwitterKafkaConsumer implements KafkaConsumer<Long, TwitterAvroMode
     @EventListener
     public void onAppStarted(ApplicationStartedEvent event) {
         kafkaAdminClient.checkTopicsCreated();
-        LOG.info("Topics wtih names {} are ready for operations!", kafkaConfigData.getTopicNamesToCreate().toArray());
+        LOG.info("Topics with names {} are ready for operations!", kafkaConfigData.getTopicNamesToCreate().toArray());
         kafkaListenerEndpointRegistry.getListenerContainer(kafkaConsumerConfigData.getConsumerGroupId()).start();
     }
 
