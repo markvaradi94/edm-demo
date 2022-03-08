@@ -1,9 +1,8 @@
 package com.microservices.demo.elastic.query.service.model;
 
+import com.microservices.demo.elastic.query.service.common.model.ElasticQueryServiceResponseModel;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
-
-import java.time.LocalDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
